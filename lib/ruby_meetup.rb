@@ -80,6 +80,8 @@ class Client
     end
   end
 
+  # Make a POST API call with the current path value and @options.
+  # Return a JSON string if successful, otherwise an Exception
   def post(options={})
     uri = new_uri
     params = merge_params(options)

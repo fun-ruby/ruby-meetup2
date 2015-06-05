@@ -25,11 +25,11 @@ module RubyMeetup
 #  > second_result = client.get({:group_id => 939203})
 #
 # If successful the captured response is a raw JSON string. The response can then
-# be processed using a JSON parser. Otherwise an exception is raised. 
+# be processed using a JSON parser. Otherwise an exception is raised.
 #
 # Typically, ApiKeyClient class is used to read data while the AuthenticatedClient
 # class is used for both read and write data, subject to Meetup API permission scopes.
-# 
+#
 # ---
 # Copyright (c) 2013 Long On, released under the MIT license
 
@@ -58,6 +58,11 @@ class Client
     get(options)
   end
 
+  def post_path(path, options={})
+    self.path = path
+    post(options)
+  end
+
   # Make a GET API call with the current path value and @options.
   # Return a JSON string if successful, otherwise an Exception
   def get(options={})
@@ -67,6 +72,21 @@ class Client
 
     Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
       request = Net::HTTP::Get.new(uri)
+      response = http.request(request)
+      unless response.is_a?(Net::HTTPSuccess)
+        raise "#{response.code} #{response.message}\n#{response.body}"
+      end
+      return response.body
+    end
+  end
+
+  def post(options={})
+    uri = new_uri
+    params = merge_params(options)
+    uri.query = URI.encode_www_form(params)
+
+    Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+      request = Net::HTTP::Post.new(uri)
       response = http.request(request)
       unless response.is_a?(Net::HTTPSuccess)
         raise "#{response.code} #{response.message}\n#{response.body}"

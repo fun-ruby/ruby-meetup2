@@ -33,6 +33,12 @@ A light-weight Ruby client for working with the Meetup API.
   > # do something with json_s
 ```
 
+### Credits
+
+ruby-meetup2 was written by:
+
+* Long On
+* github.com/domicode
 
 ## License
 

@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name        = 'ruby_meetup2'
-  s.version     = '0.5.0'
-  s.date        = '2013-10-02'
+  s.version     = '0.6.0'
+  s.date        = '2015-06-11'
   s.summary     = "Meetup API v2 Ruby client"
   s.description = "A light-weight Ruby client for working with the Meetup API"
-  s.authors     = ["Long On"]
+  s.authors     = ["Long On", "github.com/domicode"]
   s.email       = 'on.long.on@gmail.com'
   s.files       = ["lib/ruby_meetup.rb",
                   "lib/api_key_client.rb",
